@@ -10,6 +10,7 @@ Site stats is a simple way to implement some insight about your site. Frameworks
 * Amount of unique requests that got succesfully processed.
 * How much different urls got visited.
 * How much different urls got visited by unique persons.
+* Viewing the users trajectory.
 * And way more to come!
 
 ## How to use
