@@ -11,7 +11,8 @@ requests_failed = 0
 unique_processed = 0
 unique_failed = 0
 processed_data = {}
-all = {"requests made": requests_made, "unique requests": unique_made, "visited urls": amount_visited, "unique visited urls": amount_unique_visited, "failed requests": requests_failed, "processed requests": requests_processed, "unique processed requests": unique_processed, "unique failed requests": unique_failed}
+trajectory = data
+all = {"requests made": requests_made, "unique requests": unique_made, "visited urls": amount_visited, "unique visited urls": amount_unique_visited, "failed requests": requests_failed, "processed requests": requests_processed, "unique processed requests": unique_processed, "unique failed requests": unique_failed, 'trajectory': trajectory}
 def start(app):
   @app.before_request
   def not_important():
@@ -25,11 +26,16 @@ def start(app):
      if data.get(request.remote_addr) is None:
          unique_made += 1
          unique_failed += 1
-         data[request.remote_addr] = {request.url: 1}
-         amount_unique_visited[request.url] = 1
+         data[request.remote_addr] = [request.url]
+         amount_unique_visited[request.remote_addr] = {}
+         amount_unique_visited[request.remote_addr][request.url] = 1
 
-     elif data.get(request.remote_addr).get(request.url) is None:
-         amount_unique_visited[request.url] = 1
+
+     if amount_unique_visited.get(request.remote_addr).get(request.url) is None:
+        amount_unique_visited[request.url] = 1
+        if request.url not in str(data[request.remote_addr]):
+            data[request.remote_addr].append(request.url)
+
 
 
   @app.after_request
