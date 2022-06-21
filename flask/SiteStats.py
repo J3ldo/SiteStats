@@ -11,6 +11,7 @@ requests_failed = 0
 unique_processed = 0
 unique_failed = 0
 processed_data = {}
+all = {"requests made": requests_made, "unique requests": unique_made, "visited urls": amount_visited, "unique visited urls": amount_unique_visited, "failed requests": requests_failed, "processed requests": requests_processed, "unique processed requests": unique_processed, "unique failed requests": unique_failed}
 def start(app):
   @app.before_request
   def not_important():
