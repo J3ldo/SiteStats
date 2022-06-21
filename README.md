@@ -28,4 +28,5 @@ try:
   app.run("0.0.0.0", 80)
 finally:
   print(SiteStats.requests_made) #To access one of the variables.
+  print(SiteStats.all) #To get a dictionary of all variables
 ```
